@@ -6,12 +6,6 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
-import {
-  ref as storageRef,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
-import { storage } from "../plugins/firebase.client";
 
 export const useUserStore = defineStore("user", () => {
   const user = ref(null);
@@ -43,6 +37,7 @@ export const useUserStore = defineStore("user", () => {
       JSON.stringify({
         uid: userCredential.user.uid,
         email: userCredential.user.email,
+        displayName: userCredential.user.displayName,
       }),
     );
   };
@@ -62,8 +57,7 @@ export const useUserStore = defineStore("user", () => {
       JSON.stringify({
         uid: userCredential.user.uid,
         email: userCredential.user.email,
-        displayName,
-        photoURL,
+        displayName: userCredential.user.displayName,
       }),
     );
   };
@@ -79,21 +73,13 @@ export const useUserStore = defineStore("user", () => {
     localStorage.removeItem("user");
   };
 
-  const updateProfileInfo = async ({ displayName, photoFile }) => {
+  const updateProfileInfo = async (displayName) => {
     if (!auth.currentUser) return;
-    let photoURL = auth.currentUser.photoURL;
-    if (photoFile) {
-      photoURL = await uploadProfileImage(photoFile);
-    }
-    await updateProfile(auth.currentUser, {
-      displayName,
-      photoURL,
-    });
+    await updateProfile(auth.currentUser, { displayName });
 
     user.value = {
       ...user.value,
       displayName,
-      photoURL,
     };
 
     localStorage.setItem(
@@ -102,12 +88,6 @@ export const useUserStore = defineStore("user", () => {
         ...user.value,
       }),
     );
-  };
-
-  const uploadProfileImage = async (file) => {
-    const imageRef = storageRef(storage, `avatars/${auth.currentUser.uid}`);
-    await uploadBytes(imageRef, file);
-    return await getDownloadURL(imageRef);
   };
 
   return {
