@@ -1,35 +1,37 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <h2>تسجيل الدخول</h2>
+  <ClientOnly>
+    <div class="container">
+      <div class="card">
+        <h2>تسجيل الدخول</h2>
 
-      <form @submit.prevent="handleLogin">
-        <div class="form-group">
-          <label>البريد الإلكتروني</label>
-          <input type="email" v-model="email" placeholder="email" required />
-        </div>
+        <form @submit.prevent="handleLogin">
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <input type="email" v-model="email" placeholder="email" required />
+          </div>
 
-        <div class="form-group">
-          <label>كلمة المرور</label>
-          <input
-            type="password"
-            v-model="password"
-            placeholder="password"
-            required
-          />
-        </div>
+          <div class="form-group">
+            <label>كلمة المرور</label>
+            <input
+              type="password"
+              v-model="password"
+              placeholder="password"
+              required
+            />
+          </div>
 
-        <button type="submit">تسجيل الدخول</button>
-      </form>
+          <button type="submit">تسجيل الدخول</button>
+        </form>
 
-      <p class="switch">
-        ليس لديك حساب؟
-        <NuxtLink to="/register">سجل الآن</NuxtLink>
-      </p>
+        <p class="switch">
+          ليس لديك حساب؟
+          <NuxtLink to="/register">سجل الآن</NuxtLink>
+        </p>
 
-      <p v-if="error" class="error">{{ error }}</p>
+        <p v-if="error" class="error">{{ error }}</p>
+      </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <script setup>
