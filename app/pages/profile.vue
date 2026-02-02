@@ -42,7 +42,7 @@
   </ClientOnly>
 </template>
 <script setup>
-import { ref, computed, render } from "vue";
+import { ref, computed } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router";
 
@@ -53,47 +53,18 @@ const user = computed(() => userStore.user);
 const defaultAvatar = "/default-avatar.png";
 const displayName = ref(user.value?.displayName || "");
 
-const photoURL = computed(() => userStore.user?.photoURL || "");
-const previewPhoto = ref(null);
-const selectedPhoto = ref(null);
-
 const message = ref("");
 const error = ref("");
 
 const updateProfileInfo = async () => {
   try {
-    await userStore.updateProfileInfo(displayName.value, selectedPhoto.value);
+    await userStore.updateProfileInfo(displayName.value);
     message.value = "تم تحديث الملف الشخصي بنجاح!";
   } catch (err) {
     error.value = err.message || "حدث خطأ أثناء التحديث.";
   }
 };
 
-const updatePhotoURL = (e) => {
-  selectedPhoto.value = e.target.files[0];
-  previewPhoto.value = URL.createObjectURL(selectedPhoto.value);
-};
-
-// const updatePhotoURL = async (event) => {
-//   const fileInput = event.target;
-//   if (fileInput.files && fileInput.files[0]) {
-//     const file = fileInput.files[0];
-//     const reader = new FileReader();
-//     render.onload = async (e) => {
-//       try {
-//         await userStore.updatePhotoURL(e.target.result);
-//         photoURL.value = e.target.result;
-//         message.value = "تم تحديث صورة الملف الشخصي بنجاح!";
-//       } catch (err) {
-//         error.value = err.message;
-//       }
-//     };
-//     reader.onerror = () => {
-//       error.value = "فشل في قراءة الملف.";
-//     };
-//     reader.readAsDataURL(file);
-//   }
-// };
 const logout = () => {
   userStore.logout();
   router.push("/login");
