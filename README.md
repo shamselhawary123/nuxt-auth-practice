@@ -1,75 +1,74 @@
-# Nuxt Minimal Starter
+# Nuxt Auth Practice
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A practice project for building an authentication flow using **Nuxt**, **Firebase**, **Pinia**, and **Tailwind CSS**.
+
+## Overview
+
+This project was created to practice modern authentication patterns in a Nuxt application.
+
+It includes pages and structure for:
+
+- Home page
+- Login
+- Register
+- Profile
+
+The app is structured to explore authentication, route protection, state management, and frontend architecture in Nuxt.
+
+## Tech Stack
+
+- Nuxt 4
+- Vue 3
+- Pinia
+- Firebase
+- Tailwind CSS
 
 ## Setup
-
-Make sure to install dependencies:
-
-```bash
-# npm
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+## Development
 npm run dev
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
+## Build for Production
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
 npm run preview
 
-# pnpm
-pnpm preview
 
-# yarn
-yarn preview
+## Goals of This Project
 
-# bun
-bun run preview
-```
+Practice authentication with Firebase
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Learn route middleware in Nuxt
+
+Use Pinia for auth state
+
+Organize pages, plugins, and stores in a scalable way
+
+Future Improvements
+
+Password reset flow
+
+Persistent login session
+
+Role-based access
+
+Protected dashboard pages
+
+
+## Author
+
+Built by Shams Elhawary
+
+
+
+```bash
+nuxt-auth-practice/
+├── app/
+│   ├── middleware/
+│   ├── pages/
+│   ├── plugins/
+│   ├── stores/
+│   └── app.vue
+├── public/
+├── nuxt.config.ts
+└── package.json
